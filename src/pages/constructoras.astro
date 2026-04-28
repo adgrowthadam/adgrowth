@@ -1,0 +1,754 @@
+---
+// Landing page: Constructoras — Proyectos en Automático
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ad Growth | Proyectos en Automático</title>
+  <meta name="description" content="Sistema de adquisición y cierre de clientes 100% automatizado para constructoras. Deja de perder tiempo con leads que no convierten." />
+  <meta property="og:title" content="Ad Growth | Proyectos en Automático" />
+  <meta property="og:description" content="Sistema de adquisición y cierre de clientes 100% automatizado para constructoras." />
+  <meta property="og:image" content="https://placehold.co/1200x630/0d1b3e/22c55e?text=Ad+Growth" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏗️</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Montserrat', 'sans-serif'] },
+          colors: {
+            navy: { DEFAULT: '#0d1b3e', light: '#112350', dark: '#090f22', mid: '#172a55' },
+            green: { DEFAULT: '#22c55e', light: '#4ade80', dark: '#16a34a', glow: '#22c55e33' },
+            white: '#ffffff',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Montserrat', sans-serif; background: #0d1b3e; color: #ffffff; overflow-x: hidden; }
+
+    /* Geometric triangle lines navy bg */
+    .geo-navy {
+      background-color: #0d1b3e;
+      position: relative;
+    }
+    .geo-navy::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='900'%3E%3Cpolyline points='0,900 450,0 900,900' fill='none' stroke='rgba(34,197,94,0.07)' stroke-width='1.5'/%3E%3Cpolyline points='-450,900 0,0 450,900' fill='none' stroke='rgba(34,197,94,0.05)' stroke-width='1.5'/%3E%3Cpolyline points='450,900 900,0 1350,900' fill='none' stroke='rgba(34,197,94,0.05)' stroke-width='1.5'/%3E%3C/svg%3E");
+      background-size: 900px 900px;
+      background-repeat: repeat-x;
+      background-position: center top;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .geo-navy > * { position: relative; z-index: 1; }
+
+    /* Geometric triangle lines white bg */
+    .geo-white {
+      background-color: #ffffff;
+      position: relative;
+    }
+    .geo-white::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='900'%3E%3Cpolyline points='0,900 450,0 900,900' fill='none' stroke='rgba(13,27,62,0.06)' stroke-width='1.5'/%3E%3Cpolyline points='-450,900 0,0 450,900' fill='none' stroke='rgba(13,27,62,0.04)' stroke-width='1.5'/%3E%3Cpolyline points='450,900 900,0 1350,900' fill='none' stroke='rgba(13,27,62,0.04)' stroke-width='1.5'/%3E%3C/svg%3E");
+      background-size: 900px 900px;
+      background-repeat: repeat-x;
+      background-position: center top;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .geo-white > * { position: relative; z-index: 1; }
+
+    /* Diagonal accent line */
+    .diag-line::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 1px;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent, rgba(34,197,94,0.3), transparent);
+    }
+
+    /* Scroll animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* CTA button */
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #22c55e;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 14px 28px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      letter-spacing: 0.02em;
+    }
+    .btn-cta:hover { background: #16a34a; transform: translateY(-2px); }
+    .btn-cta:active { transform: translateY(0); }
+
+    .btn-cta-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: #22c55e;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 13px 28px;
+      border-radius: 8px;
+      border: 1.5px solid #22c55e;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s, transform 0.15s;
+      letter-spacing: 0.02em;
+    }
+    .btn-cta-outline:hover { background: #22c55e; color: #fff; transform: translateY(-2px); }
+
+    /* Green accent text */
+    .text-green-accent { color: #22c55e; }
+
+    /* Card */
+    .card-navy {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(34,197,94,0.15);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .card-white {
+      background: #ffffff;
+      border: 1px solid rgba(13,27,62,0.1);
+      border-radius: 12px;
+      padding: 24px;
+      color: #0d1b3e;
+    }
+
+    /* Step number */
+    .step-num {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #22c55e;
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* Navbar */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(13,27,62,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(34,197,94,0.12);
+    }
+
+    /* Hero geometric decoration */
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+
+    /* Diagonal line decorations */
+    .geo-line-1 {
+      position: absolute;
+      top: 0; right: 80px;
+      width: 1px;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent 0%, rgba(34,197,94,0.2) 40%, transparent 100%);
+    }
+    .geo-line-2 {
+      position: absolute;
+      top: 30%;
+      left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent 0%, rgba(34,197,94,0.15) 50%, transparent 100%);
+    }
+
+    /* FAQ */
+    details summary { cursor: pointer; list-style: none; }
+    details summary::-webkit-details-marker { display: none; }
+    details[open] summary .faq-icon { transform: rotate(45deg); }
+    .faq-icon { transition: transform 0.25s; }
+
+    /* Separator */
+    .sep { width: 48px; height: 3px; background: #22c55e; border-radius: 2px; }
+
+    /* Stat badge */
+    .stat-badge {
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.25);
+      border-radius: 8px;
+      padding: 12px 20px;
+      text-align: center;
+    }
+
+    /* Placeholder formulario */
+    .form-placeholder {
+      background: rgba(255,255,255,0.03);
+      border: 2px dashed rgba(34,197,94,0.35);
+      border-radius: 12px;
+      min-height: 360px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.85rem;
+      text-align: center;
+      padding: 32px;
+    }
+
+    section { position: relative; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div style="max-width:1100px; margin:0 auto; padding:14px 20px; display:flex; align-items:center; justify-content:space-between;">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <img src="/mnt/user-data/uploads/Disen_o_sin_ti_tulo.png" alt="Ad Growth" style="height:36px; width:36px; object-fit:contain;" onerror="this.style.display='none'" />
+      <span style="font-weight:800; font-size:1.1rem; letter-spacing:0.03em; color:#fff;">Ad <span class="text-green-accent">Growth</span></span>
+    </div>
+    <a href="#formulario" class="btn-cta" style="padding:10px 20px; font-size:0.85rem;">Consultoría Gratis</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="geo-navy" style="padding-top:100px; min-height:100vh; display:flex; align-items:center; overflow:hidden;">
+  <div class="geo-line-1"></div>
+  <div class="geo-line-2"></div>
+  <!-- Orbs -->
+  <div class="hero-orb" style="width:350px; height:350px; background:rgba(34,197,94,0.08); top:-80px; right:-100px;"></div>
+  <div class="hero-orb" style="width:250px; height:250px; background:rgba(34,197,94,0.05); bottom:60px; left:-80px;"></div>
+
+  <div style="max-width:1100px; margin:0 auto; padding:60px 20px; width:100%;">
+    <div class="reveal">
+      <span style="display:inline-block; background:rgba(34,197,94,0.12); border:1px solid rgba(34,197,94,0.3); border-radius:100px; padding:6px 16px; font-size:0.78rem; font-weight:600; color:#22c55e; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:24px;">Sistema de Adquisición Inteligente</span>
+    </div>
+
+    <h1 class="reveal reveal-delay-1" style="font-size:clamp(2rem, 7vw, 3.6rem); font-weight:900; line-height:1.1; margin-bottom:24px; max-width:700px;">
+      Tu constructora merece clientes que <span class="text-green-accent">realmente cierran.</span>
+    </h1>
+
+    <p class="reveal reveal-delay-2" style="font-size:clamp(1rem, 3vw, 1.2rem); color:rgba(255,255,255,0.7); max-width:580px; line-height:1.7; margin-bottom:36px;">
+      Deja de perder tiempo y presupuesto respondiendo interesados que no compran. <strong style="color:#fff;">Proyectos en Automático</strong> se encarga de atraer, calificar y dar seguimiento a tus leads por WhatsApp — sin que muevas un dedo.
+    </p>
+
+    <div class="reveal reveal-delay-3" style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:48px;">
+      <a href="#formulario" class="btn-cta">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Consultoría Gratis
+      </a>
+      <a href="#como-funciona" class="btn-cta-outline">Ver cómo funciona</a>
+    </div>
+
+    <div class="reveal reveal-delay-4" style="display:flex; flex-wrap:wrap; gap:16px;">
+      <div class="stat-badge">
+        <div style="font-size:1.5rem; font-weight:900; color:#22c55e;">100%</div>
+        <div style="font-size:0.75rem; color:rgba(255,255,255,0.6); margin-top:4px;">Automatizado</div>
+      </div>
+      <div class="stat-badge">
+        <div style="font-size:1.5rem; font-weight:900; color:#22c55e;">24/7</div>
+        <div style="font-size:0.75rem; color:rgba(255,255,255,0.6); margin-top:4px;">En operación</div>
+      </div>
+      <div class="stat-badge">
+        <div style="font-size:1.5rem; font-weight:900; color:#22c55e;">0</div>
+        <div style="font-size:0.75rem; color:rgba(255,255,255,0.6); margin-top:4px;">Leads basura</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEMA -->
+<section class="geo-white" style="padding:80px 20px;">
+  <div style="max-width:1100px; margin:0 auto;">
+
+    <div class="reveal" style="margin-bottom:48px;">
+      <div class="sep" style="margin-bottom:16px;"></div>
+      <span style="font-size:0.8rem; font-weight:600; color:#22c55e; letter-spacing:0.1em; text-transform:uppercase;">El problema real</span>
+      <h2 style="font-size:clamp(1.6rem, 5vw, 2.4rem); font-weight:800; color:#0d1b3e; margin-top:12px; max-width:620px; line-height:1.2;">
+        Invertís en publicidad, pero tu dinero se va en leads que no compran.
+      </h2>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:20px;">
+
+      <div class="card-white reveal reveal-delay-1" style="border-left:3px solid #ef4444;">
+        <div style="font-size:1.6rem; margin-bottom:12px;">📱</div>
+        <h3 style="font-weight:700; color:#0d1b3e; margin-bottom:8px; font-size:1rem;">Algoritmo roto</h3>
+        <p style="color:#475569; font-size:0.9rem; line-height:1.6;">Cuando mandás todo el tráfico directo a WhatsApp, la plataforma pierde contexto y te manda cualquier cosa menos clientes calificados.</p>
+      </div>
+
+      <div class="card-white reveal reveal-delay-2" style="border-left:3px solid #ef4444;">
+        <div style="font-size:1.6rem; margin-bottom:12px;">💸</div>
+        <h3 style="font-weight:700; color:#0d1b3e; margin-bottom:8px; font-size:1rem;">Presupuesto tirado a la basura</h3>
+        <p style="color:#475569; font-size:0.9rem; line-height:1.6;">Cada peso que invertís en anuncios termina pagando el tiempo que perdés contestando curiosos, cotizadores fantasmas e indecisos.</p>
+      </div>
+
+      <div class="card-white reveal reveal-delay-3" style="border-left:3px solid #ef4444;">
+        <div style="font-size:1.6rem; margin-bottom:12px;">🔄</div>
+        <h3 style="font-weight:700; color:#0d1b3e; margin-bottom:8px; font-size:1rem;">Desbordado operativamente</h3>
+        <p style="color:#475569; font-size:0.9rem; line-height:1.6;">Clientes actuales, materiales, mano de obra y encima perseguir leads. No es un problema de esfuerzo — es un problema de sistema.</p>
+      </div>
+
+      <div class="card-white reveal reveal-delay-4" style="border-left:3px solid #ef4444;">
+        <div style="font-size:1.6rem; margin-bottom:12px;">🩹</div>
+        <h3 style="font-weight:700; color:#0d1b3e; margin-bottom:8px; font-size:1rem;">Soluciones que son parches</h3>
+        <p style="color:#475569; font-size:0.9rem; line-height:1.6;">Agencias que solo te venden anuncios, copys "maestros" y videos con IA. Promesas sin un sistema ordenado detrás. El problema sigue igual.</p>
+      </div>
+
+    </div>
+
+    <div class="reveal" style="margin-top:44px; text-align:center;">
+      <a href="#formulario" class="btn-cta-outline" style="color:#0d1b3e; border-color:#0d1b3e;">
+        Quiero salir de esto
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- SOLUCIÓN -->
+<section class="geo-navy" style="padding:80px 20px; overflow:hidden;">
+  <div style="max-width:1100px; margin:0 auto;">
+
+    <div class="reveal" style="margin-bottom:48px;">
+      <div class="sep" style="margin-bottom:16px;"></div>
+      <span style="font-size:0.8rem; font-weight:600; color:#22c55e; letter-spacing:0.1em; text-transform:uppercase;">La solución</span>
+      <h2 style="font-size:clamp(1.6rem, 5vw, 2.4rem); font-weight:800; color:#fff; margin-top:12px; max-width:620px; line-height:1.2;">
+        Un sistema completo que trabaja por ti — de principio a cierre.
+      </h2>
+      <p style="color:rgba(255,255,255,0.65); max-width:560px; line-height:1.7; margin-top:16px; font-size:0.95rem;">
+        <strong style="color:#fff;">Proyectos en Automático</strong> no es una agencia de anuncios. Es un sistema de adquisición inteligente que combina embudos de venta estructurados con Agentes IA que califican y dan seguimiento a tus leads por WhatsApp — automáticamente, sin que intervengas.
+      </p>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:20px;">
+
+      <div class="card-navy reveal reveal-delay-1">
+        <div style="color:#22c55e; margin-bottom:14px;">
+          <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3 style="font-weight:700; color:#fff; font-size:1rem; margin-bottom:8px;">Adquisición estructurada</h3>
+        <p style="color:rgba(255,255,255,0.6); font-size:0.88rem; line-height:1.65;">Embudos de venta diseñados específicamente para constructoras. Tu publicidad deja de mandar tráfico sin sentido y empieza a atraer prospectos reales.</p>
+      </div>
+
+      <div class="card-navy reveal reveal-delay-2">
+        <div style="color:#22c55e; margin-bottom:14px;">
+          <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <h3 style="font-weight:700; color:#fff; font-size:1rem; margin-bottom:8px;">Calificación automática</h3>
+        <p style="color:rgba(255,255,255,0.6); font-size:0.88rem; line-height:1.65;">El sistema filtra quién tiene presupuesto, intención y proyecto real. Solo llegan a ti los prospectos que valen tu tiempo.</p>
+      </div>
+
+      <div class="card-navy reveal reveal-delay-3">
+        <div style="color:#22c55e; margin-bottom:14px;">
+          <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+        </div>
+        <h3 style="font-weight:700; color:#fff; font-size:1rem; margin-bottom:8px;">Seguimiento por IA en WhatsApp</h3>
+        <p style="color:rgba(255,255,255,0.6); font-size:0.88rem; line-height:1.65;">Agentes IA profesionales abren conversaciones, mantienen el interés y acompañan al prospecto hasta el cierre — directamente en WhatsApp.</p>
+      </div>
+
+      <div class="card-navy reveal reveal-delay-4">
+        <div style="color:#22c55e; margin-bottom:14px;">
+          <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </div>
+        <h3 style="font-weight:700; color:#fff; font-size:1rem; margin-bottom:8px;">Optimización continua</h3>
+        <p style="color:rgba(255,255,255,0.6); font-size:0.88rem; line-height:1.65;">El sistema aprende y ajusta. Tu costo por cliente calificado baja con el tiempo. No es un gasto — es una inversión que mejora sola.</p>
+      </div>
+
+    </div>
+
+    <div class="reveal" style="margin-top:44px; text-align:center;">
+      <a href="#formulario" class="btn-cta">Quiero este sistema para mi constructora</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- CÓMO FUNCIONA -->
+<section id="como-funciona" class="geo-white" style="padding:80px 20px;">
+  <div style="max-width:700px; margin:0 auto;">
+
+    <div class="reveal" style="margin-bottom:48px;">
+      <div class="sep" style="margin-bottom:16px;"></div>
+      <span style="font-size:0.8rem; font-weight:600; color:#22c55e; letter-spacing:0.1em; text-transform:uppercase;">El proceso</span>
+      <h2 style="font-size:clamp(1.6rem, 5vw, 2.4rem); font-weight:800; color:#0d1b3e; margin-top:12px; line-height:1.2;">
+        Así funciona Proyectos en Automático
+      </h2>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:28px;">
+
+      <div class="reveal reveal-delay-1" style="display:flex; gap:20px; align-items:flex-start;">
+        <div class="step-num">1</div>
+        <div>
+          <h3 style="font-weight:700; color:#0d1b3e; font-size:1rem; margin-bottom:6px;">Activamos el sistema de atracción</h3>
+          <p style="color:#475569; font-size:0.9rem; line-height:1.65;">Diseñamos y conectamos los embudos de venta a tu publicidad actual. Tu inversión en anuncios empieza a trabajar con una estrategia ordenada, no a ciegas.</p>
+        </div>
+      </div>
+
+      <div style="width:1px; height:24px; background:rgba(34,197,94,0.3); margin-left:22px;"></div>
+
+      <div class="reveal reveal-delay-2" style="display:flex; gap:20px; align-items:flex-start;">
+        <div class="step-num">2</div>
+        <div>
+          <h3 style="font-weight:700; color:#0d1b3e; font-size:1rem; margin-bottom:6px;">El prospecto entra al embudo</h3>
+          <p style="color:#475569; font-size:0.9rem; line-height:1.65;">En lugar de mandarte directamente a WhatsApp, el prospecto pasa por un proceso que lo califica automáticamente. Sin tu intervención.</p>
+        </div>
+      </div>
+
+      <div style="width:1px; height:24px; background:rgba(34,197,94,0.3); margin-left:22px;"></div>
+
+      <div class="reveal reveal-delay-3" style="display:flex; gap:20px; align-items:flex-start;">
+        <div class="step-num">3</div>
+        <div>
+          <h3 style="font-weight:700; color:#0d1b3e; font-size:1rem; margin-bottom:6px;">El Agente IA toma el control</h3>
+          <p style="color:#475569; font-size:0.9rem; line-height:1.65;">Nuestros Agentes IA contactan al prospecto por WhatsApp, responden preguntas, abren interés y generan confianza — de forma profesional y coherente, 24/7.</p>
+        </div>
+      </div>
+
+      <div style="width:1px; height:24px; background:rgba(34,197,94,0.3); margin-left:22px;"></div>
+
+      <div class="reveal reveal-delay-4" style="display:flex; gap:20px; align-items:flex-start;">
+        <div class="step-num">4</div>
+        <div>
+          <h3 style="font-weight:700; color:#0d1b3e; font-size:1rem; margin-bottom:6px;">Solo ves clientes listos para cerrar</h3>
+          <p style="color:#475569; font-size:0.9rem; line-height:1.65;">Cuando un prospecto está listo, llega a ti con contexto, interés real y disposición de compra. Tu trabajo es cerrar — el resto ya está hecho.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="reveal" style="margin-top:44px; text-align:center;">
+      <a href="#formulario" class="btn-cta-outline" style="color:#0d1b3e; border-color:#0d1b3e;">
+        Empezar ahora
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- BENEFICIOS -->
+<section class="geo-navy" style="padding:80px 20px;">
+  <div style="max-width:1100px; margin:0 auto;">
+
+    <div class="reveal" style="margin-bottom:48px;">
+      <div class="sep" style="margin-bottom:16px;"></div>
+      <span style="font-size:0.8rem; font-weight:600; color:#22c55e; letter-spacing:0.1em; text-transform:uppercase;">Beneficios</span>
+      <h2 style="font-size:clamp(1.6rem, 5vw, 2.4rem); font-weight:800; color:#fff; margin-top:12px; max-width:560px; line-height:1.2;">
+        Lo que cambia cuando tu negocio tiene un sistema real.
+      </h2>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:20px;">
+
+      <div class="card-navy reveal reveal-delay-1" style="display:flex; gap:16px; align-items:flex-start;">
+        <div style="width:38px; height:38px; background:rgba(34,197,94,0.15); border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+          <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <div>
+          <h3 style="font-weight:700; color:#fff; font-size:0.95rem; margin-bottom:6px;">Tiempo recuperado</h3>
+          <p style="color:rgba(255,255,255,0.6); font-size:0.87rem; line-height:1.6;">Dejas de contestar WhatsApps de personas que nunca iban a comprar. Ese tiempo vuelve a donde importa: tu operación.</p>
+        </div>
+      </div>
+
+      <div class="card-navy reveal reveal-delay-2" style="display:flex; gap:16px; align-items:flex-start;">
+        <div style="width:38px; height:38px; background:rgba(34,197,94,0.15); border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+          <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <div>
+          <h3 style="font-weight:700; color:#fff; font-size:0.95rem; margin-bottom:6px;">Menor costo por cliente</h3>
+          <p style="color:rgba(255,255,255,0.6); font-size:0.87rem; line-height:1.6;">Cuando tu publicidad está conectada a un sistema que califica, cada peso rinde más. Bajas el costo de adquisición con el mismo presupuesto.</p>
+        </div>
+      </div>
+
+      <div class="card-navy reveal reveal-delay-3" style="display:flex; gap:16px; align-items:flex-start;">
+        <div style="width:38px; height:38px; background:rgba(34,197,94,0.15); border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+          <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </div>
+        <div>
+          <h3 style="font-weight:700; color:#fff; font-size:0.95rem; margin-bottom:6px;">Flujo mensual de clientes</h3>
+          <p style="color:rgba(255,255,255,0.6); font-size:0.87rem; line-height:1.6;">Dejas de depender de la temporada o el boca a boca. El sistema trabaja de forma constante y predecible, mes a mes.</p>
+        </div>
+      </div>
+
+      <div class="card-navy reveal reveal-delay-1" style="display:flex; gap:16px; align-items:flex-start;">
+        <div style="width:38px; height:38px; background:rgba(34,197,94,0.15); border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+          <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+        </div>
+        <div>
+          <h3 style="font-weight:700; color:#fff; font-size:0.95rem; margin-bottom:6px;">Prospectos ya calificados</h3>
+          <p style="color:rgba(255,255,255,0.6); font-size:0.87rem; line-height:1.6;">Cada prospecto que llega a ti ya pasó por un filtro. Tienen presupuesto, tienen proyecto. Solo necesitan a alguien de confianza para cerrar.</p>
+        </div>
+      </div>
+
+      <div class="card-navy reveal reveal-delay-2" style="display:flex; gap:16px; align-items:flex-start;">
+        <div style="width:38px; height:38px; background:rgba(34,197,94,0.15); border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+          <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </div>
+        <div>
+          <h3 style="font-weight:700; color:#fff; font-size:0.95rem; margin-bottom:6px;">Velocidad de respuesta 24/7</h3>
+          <p style="color:rgba(255,255,255,0.6); font-size:0.87rem; line-height:1.6;">El Agente IA responde en segundos, no en horas. En este mercado, quien responde primero cierra primero. Tu competencia no tiene esto.</p>
+        </div>
+      </div>
+
+      <div class="card-navy reveal reveal-delay-3" style="display:flex; gap:16px; align-items:flex-start;">
+        <div style="width:38px; height:38px; background:rgba(34,197,94,0.15); border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+          <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        </div>
+        <div>
+          <h3 style="font-weight:700; color:#fff; font-size:0.95rem; margin-bottom:6px;">Visibilidad total de tu proceso</h3>
+          <p style="color:rgba(255,255,255,0.6); font-size:0.87rem; line-height:1.6;">Sabes exactamente en qué etapa está cada prospecto, cuántos entran, cuántos cierran. Tu negocio deja de ser una caja negra.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="reveal" style="margin-top:44px; text-align:center;">
+      <a href="#formulario" class="btn-cta">Quiero estos resultados</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- OFERTA + GARANTÍA -->
+<section class="geo-white" style="padding:80px 20px;">
+  <div style="max-width:700px; margin:0 auto; text-align:center;">
+
+    <div class="reveal">
+      <div class="sep" style="margin:0 auto 16px;"></div>
+      <span style="font-size:0.8rem; font-weight:600; color:#22c55e; letter-spacing:0.1em; text-transform:uppercase;">El primer paso</span>
+      <h2 style="font-size:clamp(1.6rem, 5vw, 2.4rem); font-weight:800; color:#0d1b3e; margin-top:12px; line-height:1.2;">
+        Empieza sin riesgo. La primera consultoría es gratis.
+      </h2>
+      <p style="color:#475569; max-width:520px; margin:20px auto 0; line-height:1.7; font-size:0.95rem;">
+        Antes de hablar de cualquier inversión, analizamos juntos tu situación actual: tus anuncios, tus leads, tu proceso. Salís de esa llamada con claridad — aunque no trabajes con nosotros.
+      </p>
+    </div>
+
+    <div class="reveal reveal-delay-1" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:16px; margin-top:44px;">
+      <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:12px; padding:20px; text-align:left;">
+        <div style="font-size:1.4rem; margin-bottom:10px;">✅</div>
+        <p style="color:#166534; font-weight:600; font-size:0.9rem; margin:0;">Sin compromiso de compra</p>
+      </div>
+      <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:12px; padding:20px; text-align:left;">
+        <div style="font-size:1.4rem; margin-bottom:10px;">✅</div>
+        <p style="color:#166534; font-weight:600; font-size:0.9rem; margin:0;">Diagnóstico real de tu situación</p>
+      </div>
+      <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:12px; padding:20px; text-align:left;">
+        <div style="font-size:1.4rem; margin-bottom:10px;">✅</div>
+        <p style="color:#166534; font-weight:600; font-size:0.9rem; margin:0;">Solo para constructoras activas</p>
+      </div>
+    </div>
+
+    <div class="reveal reveal-delay-2" style="margin-top:36px;">
+      <a href="#formulario" class="btn-cta" style="font-size:1rem; padding:16px 36px;">
+        Agendar mi Consultoría Gratis
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <p style="color:#94a3b8; font-size:0.8rem; margin-top:12px;">Sin spam. Sin presión. Solo una conversación honesta.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="geo-navy" style="padding:80px 20px;">
+  <div style="max-width:700px; margin:0 auto;">
+
+    <div class="reveal" style="margin-bottom:48px;">
+      <div class="sep" style="margin-bottom:16px;"></div>
+      <span style="font-size:0.8rem; font-weight:600; color:#22c55e; letter-spacing:0.1em; text-transform:uppercase;">Preguntas frecuentes</span>
+      <h2 style="font-size:clamp(1.6rem, 5vw, 2.2rem); font-weight:800; color:#fff; margin-top:12px;">Lo que más nos preguntan.</h2>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:12px;">
+
+      <details class="reveal reveal-delay-1" style="background:rgba(255,255,255,0.04); border:1px solid rgba(34,197,94,0.15); border-radius:12px; overflow:hidden;">
+        <summary style="padding:20px 24px; display:flex; justify-content:space-between; align-items:center; font-weight:600; color:#fff; font-size:0.95rem;">
+          ¿Necesito cambiar toda mi publicidad actual?
+          <span class="faq-icon" style="color:#22c55e; font-size:1.4rem; line-height:1;">+</span>
+        </summary>
+        <div style="padding:0 24px 20px; color:rgba(255,255,255,0.65); font-size:0.9rem; line-height:1.7;">
+          No. Trabajamos con lo que ya tenés. El sistema se integra a tu inversión actual y la optimiza. No tirás nada a la basura — lo ordenamos y le damos una dirección clara.
+        </div>
+      </details>
+
+      <details class="reveal reveal-delay-2" style="background:rgba(255,255,255,0.04); border:1px solid rgba(34,197,94,0.15); border-radius:12px; overflow:hidden;">
+        <summary style="padding:20px 24px; display:flex; justify-content:space-between; align-items:center; font-weight:600; color:#fff; font-size:0.95rem;">
+          ¿Cuánto tiempo tarda en funcionar?
+          <span class="faq-icon" style="color:#22c55e; font-size:1.4rem; line-height:1;">+</span>
+        </summary>
+        <div style="padding:0 24px 20px; color:rgba(255,255,255,0.65); font-size:0.9rem; line-height:1.7;">
+          El sistema se configura y activa en los primeros días. Los primeros resultados comienzan a verse en las primeras semanas. El rendimiento se optimiza con el tiempo.
+        </div>
+      </details>
+
+      <details class="reveal reveal-delay-3" style="background:rgba(255,255,255,0.04); border:1px solid rgba(34,197,94,0.15); border-radius:12px; overflow:hidden;">
+        <summary style="padding:20px 24px; display:flex; justify-content:space-between; align-items:center; font-weight:600; color:#fff; font-size:0.95rem;">
+          ¿El Agente IA suena robótico o artificial?
+          <span class="faq-icon" style="color:#22c55e; font-size:1.4rem; line-height:1;">+</span>
+        </summary>
+        <div style="padding:0 24px 20px; color:rgba(255,255,255,0.65); font-size:0.9rem; line-height:1.7;">
+          No. Los Agentes están configurados con el tono, vocabulario y personalidad de tu negocio. El prospecto tiene una conversación natural — profesional, sin fricciones.
+        </div>
+      </details>
+
+      <details class="reveal reveal-delay-4" style="background:rgba(255,255,255,0.04); border:1px solid rgba(34,197,94,0.15); border-radius:12px; overflow:hidden;">
+        <summary style="padding:20px 24px; display:flex; justify-content:space-between; align-items:center; font-weight:600; color:#fff; font-size:0.95rem;">
+          ¿Esto funciona para remodelaciones pequeñas o solo construcción grande?
+          <span class="faq-icon" style="color:#22c55e; font-size:1.4rem; line-height:1;">+</span>
+        </summary>
+        <div style="padding:0 24px 20px; color:rgba(255,255,255,0.65); font-size:0.9rem; line-height:1.7;">
+          Funciona para cualquier constructora con ticket promedio desde $30,000 MXN. El sistema se adapta al tipo de proyecto y al perfil de cliente que buscás.
+        </div>
+      </details>
+
+      <details class="reveal" style="background:rgba(255,255,255,0.04); border:1px solid rgba(34,197,94,0.15); border-radius:12px; overflow:hidden;">
+        <summary style="padding:20px 24px; display:flex; justify-content:space-between; align-items:center; font-weight:600; color:#fff; font-size:0.95rem;">
+          ¿Qué necesito de mi parte para que funcione?
+          <span class="faq-icon" style="color:#22c55e; font-size:1.4rem; line-height:1;">+</span>
+        </summary>
+        <div style="padding:0 24px 20px; color:rgba(255,255,255,0.65); font-size:0.9rem; line-height:1.7;">
+          Que ya estés invirtiendo en publicidad y que tengas la capacidad de atender nuevos proyectos. Nosotros hacemos el resto. Tú solo cerrás.
+        </div>
+      </details>
+
+    </div>
+
+    <div class="reveal" style="margin-top:44px; text-align:center;">
+      <a href="#formulario" class="btn-cta">Tengo más preguntas — agendar llamada</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="geo-navy" style="padding:80px 20px; border-top:1px solid rgba(34,197,94,0.15);">
+  <div style="max-width:680px; margin:0 auto; text-align:center;">
+    <div class="reveal">
+      <h2 style="font-size:clamp(1.8rem, 6vw, 2.8rem); font-weight:900; color:#fff; line-height:1.15; margin-bottom:20px;">
+        Ya sabés que existe una mejor forma. <span class="text-green-accent">Activala.</span>
+      </h2>
+      <p style="color:rgba(255,255,255,0.65); font-size:1rem; line-height:1.7; margin-bottom:36px; max-width:520px; margin-left:auto; margin-right:auto;">
+        Los contratistas que siguen mandando todo a WhatsApp sin un sistema seguirán perdiendo dinero. Los que decidan actuar hoy tendrán una ventaja real sobre su competencia mañana.
+      </p>
+      <a href="#formulario" class="btn-cta" style="font-size:1.05rem; padding:16px 40px;">
+        Consultoría Gratis — Sin compromiso
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FORMULARIO GHL -->
+<section id="formulario" class="geo-navy" style="padding:80px 20px; border-top:1px solid rgba(34,197,94,0.12);">
+  <div style="max-width:700px; margin:0 auto;">
+
+    <div class="reveal" style="text-align:center; margin-bottom:40px;">
+      <div class="sep" style="margin:0 auto 16px;"></div>
+      <span style="font-size:0.8rem; font-weight:600; color:#22c55e; letter-spacing:0.1em; text-transform:uppercase;">Agenda tu lugar</span>
+      <h2 style="font-size:clamp(1.6rem, 5vw, 2.2rem); font-weight:800; color:#fff; margin-top:12px; line-height:1.2;">
+        Dejá tus datos y te contactamos.
+      </h2>
+      <p style="color:rgba(255,255,255,0.6); margin-top:12px; font-size:0.9rem;">Solo para constructoras activas que ya invierten en publicidad.</p>
+    </div>
+
+    <div class="reveal reveal-delay-1">
+      <!-- PLACEHOLDER FORMULARIO GHL — Reemplazá este bloque con el embed code de Go High Level -->
+      <div class="form-placeholder">
+        <svg width="40" height="40" fill="none" stroke="rgba(34,197,94,0.5)" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        <p style="font-weight:600; color:rgba(255,255,255,0.5); font-size:0.9rem;">EMBED FORMULARIO GO HIGH LEVEL</p>
+        <p style="color:rgba(255,255,255,0.3); font-size:0.8rem;">Pegá aquí el código de embed que te genera GHL.<br/>Eliminá este div y reemplazalo con tu &lt;script&gt; o &lt;iframe&gt;.</p>
+      </div>
+      <!-- FIN PLACEHOLDER -->
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#090f22; border-top:1px solid rgba(34,197,94,0.1); padding:40px 20px;">
+  <div style="max-width:1100px; margin:0 auto; display:flex; flex-wrap:wrap; gap:24px; justify-content:space-between; align-items:center;">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <img src="/mnt/user-data/uploads/Disen_o_sin_ti_tulo.png" alt="Ad Growth" style="height:32px; width:32px; object-fit:contain;" onerror="this.style.display='none'" />
+      <span style="font-weight:800; font-size:1rem; color:#fff;">Ad <span class="text-green-accent">Growth</span></span>
+    </div>
+    <p style="color:rgba(255,255,255,0.35); font-size:0.8rem; margin:0;">© 2025 Ad Growth. Todos los derechos reservados.</p>
+    <a href="#formulario" class="btn-cta" style="padding:10px 20px; font-size:0.82rem;">Consultoría Gratis</a>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+
+  // FAQ smooth open
+  document.querySelectorAll('details').forEach(detail => {
+    detail.addEventListener('toggle', () => {});
+  });
+
+  // Nav active scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    if (window.scrollY > 40) {
+      nav.style.background = 'rgba(9,15,34,0.97)';
+    } else {
+      nav.style.background = 'rgba(13,27,62,0.92)';
+    }
+  });
+</script>
+
+</body>
+</html>

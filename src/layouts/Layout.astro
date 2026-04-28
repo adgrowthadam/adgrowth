@@ -1,23 +1,543 @@
+---
+interface Props {
+  titulo?: string;
+  descripcion?: string;
+  canonicalUrl?: string;
+  imagenOg?: string;
+  noIndex?: boolean;
+}
+
+const {
+  titulo = 'AdGrowth | Llena Tu Consultorio Sin Depender de Referidos — Tlaxcala y Puebla',
+  descripcion = 'Llenamos tu agenda de pacientes sin que dependas de referidos ni del WhatsApp. Sistema completo de atracción, seguimiento y organización para médicos, dentistas y clínicas en Tlaxcala y Puebla.',
+  canonicalUrl,
+  imagenOg = '/og-adgrowth.jpg',
+  noIndex = false,
+} = Astro.props;
+
+const urlCanonica = canonicalUrl ?? new URL(Astro.url.pathname, Astro.site ?? 'https://adgrowth.mx').href;
+
+const schemaOrganizacion = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'AdGrowth',
+  description: 'Sistema de captación y gestión de pacientes para médicos, dentistas y clínicas en Tlaxcala y Puebla, México.',
+  url: 'https://adgrowth.mx',
+  areaServed: [
+    { '@type': 'AdministrativeArea', name: 'Tlaxcala', addressCountry: 'MX' },
+    { '@type': 'AdministrativeArea', name: 'Puebla', addressCountry: 'MX' },
+  ],
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'sales',
+    availableLanguage: 'Spanish',
+  },
+};
+
+const schemaSoftware = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'AdGrowth',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  description:
+    'Sistema completo para llenar la agenda de médicos, dentistas y clínicas en Tlaxcala y Puebla: publicidad en Meta Ads, CRM automatizado y seguimiento de pacientes sin esfuerzo técnico.',
+  offers: {
+    '@type': 'Offer',
+    priceCurrency: 'MXN',
+    availability: 'https://schema.org/InStock',
+  },
+  featureList: [
+    'Captación de pacientes con anuncios en Meta Ads',
+    'CRM especializado para consultorios',
+    'Seguimiento automático por WhatsApp',
+    'Recordatorios y confirmación de citas',
+    'Reportes de resultados sin tecnicismos',
+  ],
+};
+---
+
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang="es-MX">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Primario -->
+    <title>{titulo}</title>
+    <meta name="description" content={descripcion} />
+    <meta
+      name="keywords"
+      content="captación de pacientes Tlaxcala, más pacientes Puebla, sistema CRM médicos, publicidad dental Puebla, llenar agenda médica, marketing médico Tlaxcala, pacientes para dentistas Puebla, consultorio médico Tlaxcala, sistema gestión pacientes, automatización consultorios"
+    />
+    <meta name="robots" content={noIndex ? 'noindex, nofollow' : 'index, follow'} />
+    <meta name="author" content="AdGrowth" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={urlCanonica} />
+
+    <!-- Geo targeting — Tlaxcala y Puebla, México -->
+    <meta name="geo.region" content="MX-TLA" />
+    <meta name="geo.placename" content="Tlaxcala y Puebla, México" />
+    <meta name="geo.position" content="19.3139;-98.1978" />
+    <meta name="ICBM" content="19.3139, -98.1978" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={urlCanonica} />
+    <meta property="og:title" content={titulo} />
+    <meta property="og:description" content={descripcion} />
+    <meta property="og:image" content={imagenOg} />
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:site_name" content="AdGrowth" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={titulo} />
+    <meta name="twitter:description" content={descripcion} />
+    <meta name="twitter:image" content={imagenOg} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaOrganizacion)} />
+    <script type="application/ld+json" set:html={JSON.stringify(schemaSoftware)} />
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header class="header" role="banner">
+      <div class="contenedor header__inner">
+        <a href="/" class="logo" aria-label="AdGrowth — Inicio">
+          Ad<span>Growth</span>
+        </a>
+
+        <nav class="header__nav" aria-label="Navegación principal">
+          <a href="/#como-funciona">Cómo funciona</a>
+          <a href="/#servicios">Servicios</a>
+          <a href="/#contacto">Contacto</a>
+        </nav>
+
+        <a
+          href="https://wa.me/5200000000?text=Hola%2C%20me%20interesa%20AdGrowth%2C%20¿me%20pueden%20dar%20más%20información%3F"
+          class="btn btn--primario"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Hablar con un experto por WhatsApp"
+        >
+          Hablar con un experto
+        </a>
+      </div>
+    </header>
+
+    <main id="contenido-principal" tabindex="-1">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+      <div class="contenedor footer__inner">
+        <div class="footer__marca">
+          <a href="/" class="logo logo--claro" aria-label="AdGrowth — Inicio">
+            Ad<span>Growth</span>
+          </a>
+          <p>Sistema de captación de pacientes para médicos, dentistas y clínicas en Tlaxcala y Puebla.</p>
+        </div>
+
+        <nav class="footer__nav" aria-label="Navegación del pie de página">
+          <a href="/#como-funciona">Cómo funciona</a>
+          <a href="/#servicios">Servicios</a>
+          <a href="/#contacto">Contacto</a>
+        </nav>
+      </div>
+
+      <div class="contenedor footer__copy">
+        <p>© {new Date().getFullYear()} AdGrowth. Todos los derechos reservados.</p>
+        <p>Tlaxcala y Puebla, México</p>
+      </div>
+    </footer>
+  </body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+<style is:global>
+  /* ============================================
+     DESIGN TOKENS
+  ============================================ */
+  :root {
+    /* Colores */
+    --azul-900: #0f172a;
+    --azul-800: #1e293b;
+    --azul-700: #1e3a8a;
+    --primario: #1d4ed8;
+    --primario-hover: #1e40af;
+    --primario-claro: #dbeafe;
+    --acento: #0ea5e9;
+    --acento-claro: #e0f2fe;
+    --verde: #059669;
+    --verde-claro: #d1fae5;
+
+    /* Neutros */
+    --blanco: #ffffff;
+    --gris-50: #f8fafc;
+    --gris-100: #f1f5f9;
+    --gris-200: #e2e8f0;
+    --gris-400: #94a3b8;
+    --gris-500: #64748b;
+    --gris-700: #334155;
+    --gris-900: #0f172a;
+
+    /* Tipografía */
+    --fuente: 'Inter', system-ui, -apple-system, sans-serif;
+    --texto-xs: 0.75rem;
+    --texto-sm: 0.875rem;
+    --texto-base: 1rem;
+    --texto-lg: 1.125rem;
+    --texto-xl: 1.25rem;
+    --texto-2xl: 1.5rem;
+    --texto-3xl: 1.875rem;
+    --texto-4xl: 2.25rem;
+    --texto-5xl: 3rem;
+    --texto-6xl: 3.75rem;
+
+    /* Espaciado */
+    --radio-sm: 0.5rem;
+    --radio: 0.75rem;
+    --radio-lg: 1rem;
+    --radio-xl: 1.5rem;
+    --radio-full: 9999px;
+    --sombra-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --sombra: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --sombra-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --sombra-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+    /* Layout */
+    --max-ancho: 1200px;
+    --padding-x: clamp(1rem, 4vw, 1.5rem);
+  }
+
+  /* ============================================
+     RESET
+  ============================================ */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: var(--fuente);
+    font-size: var(--texto-base);
+    line-height: 1.6;
+    color: var(--gris-900);
+    background: var(--blanco);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  img,
+  svg,
+  video {
+    display: block;
+    max-width: 100%;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  ul,
+  ol {
+    list-style: none;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font-family: inherit;
+  }
+
+  /* ============================================
+     UTILIDADES
+  ============================================ */
+  .contenedor {
+    width: 100%;
+    max-width: var(--max-ancho);
+    margin-inline: auto;
+    padding-inline: var(--padding-x);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  /* ============================================
+     BOTONES
+  ============================================ */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radio-full);
+    font-size: var(--texto-sm);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease,
+      transform 0.15s ease, box-shadow 0.2s ease;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+
+  .btn--primario {
+    background: var(--primario);
+    color: var(--blanco);
+    border-color: var(--primario);
+  }
+
+  .btn--primario:hover,
+  .btn--primario:focus-visible {
+    background: var(--primario-hover);
+    border-color: var(--primario-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px -4px rgb(29 78 216 / 0.45);
+    outline: none;
+  }
+
+  .btn--secundario {
+    background: transparent;
+    color: var(--primario);
+    border-color: var(--primario);
+  }
+
+  .btn--secundario:hover,
+  .btn--secundario:focus-visible {
+    background: var(--primario-claro);
+    outline: none;
+  }
+
+  .btn--blanco {
+    background: var(--blanco);
+    color: var(--primario);
+    border-color: var(--blanco);
+  }
+
+  .btn--blanco:hover,
+  .btn--blanco:focus-visible {
+    background: var(--gris-100);
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-xl);
+    outline: none;
+  }
+
+  .btn--contorno-blanco {
+    background: transparent;
+    color: var(--blanco);
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+
+  .btn--contorno-blanco:hover,
+  .btn--contorno-blanco:focus-visible {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--blanco);
+    outline: none;
+  }
+
+  .btn--whatsapp {
+    background: #25d366;
+    color: var(--blanco);
+    border-color: #25d366;
+  }
+
+  .btn--whatsapp:hover,
+  .btn--whatsapp:focus-visible {
+    background: #1ebe5b;
+    border-color: #1ebe5b;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px -4px rgb(37 211 102 / 0.45);
+    outline: none;
+  }
+
+  .btn--grande {
+    padding: 1rem 2rem;
+    font-size: var(--texto-base);
+  }
+
+  /* ============================================
+     LOGO
+  ============================================ */
+  .logo {
+    font-size: var(--texto-xl);
+    font-weight: 900;
+    color: var(--gris-900);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    text-decoration: none;
+  }
+
+  .logo span {
+    color: var(--primario);
+  }
+
+  .logo--claro {
+    color: var(--blanco);
+  }
+
+  .logo--claro span {
+    color: var(--acento);
+  }
+
+  /* ============================================
+     HEADER
+  ============================================ */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow:
+      0 1px 0 rgba(0, 0, 0, 0.06),
+      0 4px 16px rgba(0, 0, 0, 0.04);
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding-block: 1.125rem;
+  }
+
+  .header__nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .header__nav a {
+    font-size: var(--texto-sm);
+    font-weight: 500;
+    color: var(--gris-500);
+    transition: color 0.2s;
+  }
+
+  .header__nav a:hover {
+    color: var(--primario);
+  }
+
+  @media (max-width: 768px) {
+    .header__nav {
+      display: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .header__inner {
+      gap: 1rem;
+    }
+
+    .btn--primario.header__cta {
+      padding: 0.625rem 1rem;
+      font-size: var(--texto-xs);
+    }
+  }
+
+  /* ============================================
+     FOOTER
+  ============================================ */
+  .footer {
+    background: var(--azul-900);
+    color: var(--gris-400);
+    padding-top: 3.5rem;
+    padding-bottom: 2rem;
+  }
+
+  .footer__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 3rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--azul-800);
+  }
+
+  .footer__marca p {
+    margin-top: 0.75rem;
+    font-size: var(--texto-sm);
+    max-width: 32ch;
+    line-height: 1.7;
+  }
+
+  .footer__nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.875rem;
+  }
+
+  .footer__nav a {
+    font-size: var(--texto-sm);
+    transition: color 0.2s;
+  }
+
+  .footer__nav a:hover {
+    color: var(--blanco);
+  }
+
+  .footer__copy {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 1.75rem;
+    font-size: var(--texto-xs);
+  }
+
+  @media (max-width: 640px) {
+    .footer__inner {
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .footer__nav {
+      align-items: flex-start;
+    }
+
+    .footer__copy {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+  }
 </style>
